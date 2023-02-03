@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """This file contains the safely_get_value function"""
 
-from typing import Sequence, Mapping, Any, TypeVar, Union
+from typing import Mapping, Any, TypeVar, Union
 
 T = TypeVar("T")
 
