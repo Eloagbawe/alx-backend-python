@@ -8,3 +8,8 @@ solutions to python async exercises
 
     wait_n should return the list of all the delays (float values). The list of the delays should be in ascending order without using sort() because of concurrency
 
+2. From the previous file, import wait_n into 2-measure_runtime.py.
+
+Create a measure_time function with integers n and max_delay as arguments that measures the total execution time for wait_n(n, max_delay), and returns total_time / n. Your function should return a float.
+
+    Use the time module to measure an approximate elapsed time.
