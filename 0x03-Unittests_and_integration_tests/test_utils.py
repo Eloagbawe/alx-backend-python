@@ -8,8 +8,9 @@ from typing import (
     Dict,
     Callable,
 )
-from parameterized import parameterized, parameterized_class
-from utils import access_nested_map
+from parameterized import parameterized
+from utils import access_nested_map, get_json
+from unittest.mock import patch, MagicMock
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -34,3 +35,22 @@ class TestAccessNestedMap(unittest.TestCase):
 
         with self.assertRaises(result):
             access_nested_map(nested_map, path)
+
+
+class TestGetJson(unittest.TestCase):
+    """The TestGetJson Class"""
+
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False}),
+    ])
+    @patch('utils.requests')
+    def test_get_json(self, test_url: str, test_payload: Dict,
+                      mock_request: Callable) -> None:
+        """The test_get_json function"""
+
+        mock_response = MagicMock()
+        mock_response.json.return_value = test_payload
+
+        mock_request.get.return_value = mock_response
+        self.assertEqual(get_json(test_url), test_payload)
