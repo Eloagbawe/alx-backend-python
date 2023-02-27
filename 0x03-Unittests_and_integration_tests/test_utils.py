@@ -23,3 +23,14 @@ class TestAccessNestedMap(unittest.TestCase):
                                path: Sequence, result: Any) -> Any:
         """The test_access_nested_map function"""
         self.assertEqual(access_nested_map(nested_map, path), result)
+
+    @parameterized.expand([
+        ({}, ('a'), KeyError),
+        ({"a": 1}, ('a', 'b'), KeyError),
+    ])
+    def test_access_nested_map_exception(self, nested_map: Mapping,
+                                         path: Sequence, result: Any) -> Any:
+        """The test_access_nested_map_exception function"""
+
+        with self.assertRaises(result):
+            access_nested_map(nested_map, path)
