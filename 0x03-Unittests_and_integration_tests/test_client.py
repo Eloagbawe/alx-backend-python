@@ -36,7 +36,7 @@ class TestGithubOrgClient(unittest.TestCase):
         #     "https://api.github.com/orgs/{}".format(org)
         # )
 
-    def test_public_repos_url(self):
+    def test_public_repos_url(self) -> None:
         """The test_public_repos_url method"""
         with mock.patch('client.GithubOrgClient.org',
                         new_callable=PropertyMock) as mock_method:
@@ -48,7 +48,7 @@ class TestGithubOrgClient(unittest.TestCase):
                              'https://api.github.com/google/repos')
 
     @patch('client.get_json')
-    def test_public_repos(self, mock_requests: MagicMock):
+    def test_public_repos(self, mock_requests: MagicMock) -> None:
         """The test_public_repos_url method"""
         payload = {
             'repos_url': 'https://api.github.com/google/repos',
@@ -70,3 +70,13 @@ class TestGithubOrgClient(unittest.TestCase):
             ])
             mock_requests.assert_called_once()
         mock_property.assert_called_once()
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False),
+    ])
+    def test_has_license(self, repo: Dict[str, Dict],
+                         license_key: str, result: bool) -> None:
+        """The test_has_license method"""
+        client_class = GithubOrgClient('google')
+        self.assertEqual(client_class.has_license(repo, license_key), result)
