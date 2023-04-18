@@ -62,3 +62,31 @@ solutions to unittests and integration tests exercises
                 return self.a_method()
 
     Use unittest.mock.patch to mock a_method. Test that when calling a_property twice, the correct result is returned but a_method is only called once using assert_called_once.
+
+
+4. Parameterize and patch as decorators
+
+    Familiarize yourself with the client.GithubOrgClient class.
+
+    In a new test_client.py file, declare the TestGithubOrgClient(unittest.TestCase) class and implement the test_org method.
+
+    This method should test that GithubOrgClient.org returns the correct value.
+
+    Use @patch as a decorator to make sure get_json is called once with the expected argument but make sure it is not executed.
+
+    Use @parameterized.expand as a decorator to parametrize the test with a couple of org examples to pass to GithubOrgClient, in this order:
+
+        google
+        abc
+
+    Of course, no external HTTP calls should be made.
+
+5.  Mocking a property
+
+    memoize turns methods into properties. Read up on how to mock a property (see resource).
+
+    Implement the test_public_repos_url method to unit-test GithubOrgClient._public_repos_url.
+
+    Use patch as a context manager to patch GithubOrgClient.org and make it return a known payload.
+
+    Test that the result of _public_repos_url is the expected one based on the mocked payload.
