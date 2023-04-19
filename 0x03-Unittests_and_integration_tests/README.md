@@ -90,3 +90,26 @@ solutions to unittests and integration tests exercises
     Use patch as a context manager to patch GithubOrgClient.org and make it return a known payload.
 
     Test that the result of _public_repos_url is the expected one based on the mocked payload.
+
+6. More patching
+
+    Implement TestGithubOrgClient.test_public_repos to unit-test GithubOrgClient.public_repos.
+
+    Use @patch as a decorator to mock get_json and make it return a payload of your choice.
+
+    Use patch as a context manager to mock GithubOrgClient._public_repos_url and return a value of your choice.
+
+    Test that the list of repos is what you expect from the chosen payload.
+
+    Test that the mocked property and the mocked get_json was called once.
+
+7. Parameterize
+
+    Implement TestGithubOrgClient.test_has_license to unit-test GithubOrgClient.has_license.
+
+    Parametrize the test with the following inputs
+
+        repo={"license": {"key": "my_license"}}, license_key="my_license"
+        repo={"license": {"key": "other_license"}}, license_key="my_license"
+
+    You should also parameterize the expected returned value.
